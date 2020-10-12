@@ -26,4 +26,16 @@ router.get('/services', function(req, res, next) {
   res.render('services', { title: 'Services' });
 });
 
+// Download CV
+router.get('/download-cv', function(req, res, next) {
+  var fs = require("fs");
+
+  var file = fs.createReadStream('./public/cv.pdf');
+  var stat = fs.statSync('./public/cv.pdf');
+  res.setHeader('Content-Length', stat.size);
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=cv.pdf');
+  file.pipe(res);
+});
+
 module.exports = router;
