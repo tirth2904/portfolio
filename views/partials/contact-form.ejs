@@ -1,0 +1,29 @@
+<form action="/contact" class="site-form">
+    <h3 class="mb-5">Get In Touch</h3>
+    <div class="form-group">
+        <input type="text" class="form-control px-3 py-4" placeholder="Your Name *" name="name" required>
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control px-3 py-4" placeholder="Your Email *" name="email" required>
+    </div>
+    <div class="form-group">
+        <input type="tel" class="form-control px-3 py-4" placeholder="Your Phone" name="phone">
+    </div>
+    <div class="form-group mb-5">
+        <textarea class="form-control px-3 py-4"cols="30" rows="10" placeholder="Write a Message"  name="message" required></textarea>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary  px-4 py-3" value="Send Message">
+    </div>
+</form>
+
+<div class="form-submitted" style="display: none;">
+    <div class="alert alert-success">
+        We have received your message!
+    </div>
+
+    <div id="form-data" class="mt-3">
+        Form Data:
+        <br/>
+    </div>
+</div>

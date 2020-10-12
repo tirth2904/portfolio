@@ -1,3 +1,9 @@
+/**
+ * Filename: custom.js
+ * Student Name:  Tirth Shah
+ * Student ID: 301108145
+ * Date: 11 OCT 2020
+ */
 (function() {
 	'use strict';
 
@@ -329,7 +335,19 @@
 		portfolioMasonry();
 	});
 
-	
+	// prevent contact form from submitting
+	$('.site-form').on('submit', function(e) {
+		e.preventDefault();
+
+		$(this).css('display', 'none');
+		let data = $(this).serialize();
+
+		data.split('&').forEach(item => {
+			$('#form-data').append(item.replace("=", ': ') + "<br/>");
+		});
+
+		$('.form-submitted').css('display', 'block');
+	});
 
 
 })();

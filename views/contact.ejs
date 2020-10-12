@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); %>
+</head>
+<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
+
+<header>
+	<title>Tirth Shah's Contact Info</title>
+    <%- include('partials/header'); %>
+</header>
+
+<main>
+    <section class="site-section" id="section-contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 mb-5">
+					<div class="section-heading text-center">
+						<h2>Get <strong>In Touch</strong></h2>
+					</div>
+				</div>
+
+				<div class="col-md-7 mb-5 mb-md-0">
+                    
+                    <%- include('partials/contact-form'); %>
+                    
+				</div>
+				<div class="col-md-5 pl-md-5">
+                    
+                    <%- include('partials/info'); %>
+                    
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+
+<footer>
+    <%- include('partials/footer'); %>
+</footer>
+
+<%- include('partials/scripts'); %>
+
+</body>
+</html>
