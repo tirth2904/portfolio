@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dashboard Section</title>
+    <title>Business Contact List Section</title>
     <%- include('partials/head-admin'); %>
 </head>
 <body>
@@ -12,17 +12,19 @@
     <main class="container-fluid row mt-5">
         <section class="col col-lg-8">
             <div class="container">
-                <div class="jumbotron">
-                    <h1 class="display-3">Welcome to your dashboard</h1>
-                    <% if(locals.user) { %>
-						<h2 class="display-4"><%= user.names %></h2>
-                    <% } %>
-                    <p class="lead">View your personalized dashboard and manage business contacts</p>
+                <div class="py-5">
+                    <h3 class="display-4 text-center">Business Contact List</h3>
 
-                    <hr class="my-4">
-                    <a href="/contact-list" class="btn btn-primary" >
-                        Manage Contact List
-                    </a>
+                    <div class="row">
+                        <div class="col col-lg-6">
+                            <h1>List</h1>
+                        </div>
+
+                        <div class="col col-lg-6">
+                            
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>

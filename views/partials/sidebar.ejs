@@ -1,0 +1,19 @@
+<p class="text-center">
+    Logged in user:
+<% if(locals.user) { %>
+    <span class="lead ml-2  font-weight-bold"><%= user.names %></span>
+    <br/>
+    <span class="ml-2 font-weight-light">Username: <%= user.username %></span>
+<% } %>
+</p>
+
+<hr class="my-4">
+
+<h3 class="display-5 text-center">Hi There</h3>
+<% if(locals.user) { %>
+    <p class="lead text-center">My name is Tirth Shah</p>
+<% } %>
+<img src="images/image_1.jpg" alt="img" class="img-fluid">
+
+<br/>
+<br/>

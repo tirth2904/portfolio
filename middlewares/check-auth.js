@@ -6,6 +6,7 @@ const checkAuth = (req, res, next) => {
     console.log(req.session.user);
     // next(err);  // Error, trying to access unauthorized page!
     res.redirect('/login'); // redirect to login page
+    return ;
   }
 }
 
