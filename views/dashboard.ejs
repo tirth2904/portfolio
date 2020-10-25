@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head-admin'); %>
+</head>
+<body>
+
+    <header>
+        <title>Dashboard Section</title>
+        <%- include('partials/header-admin'); %>
+    </header>
+
+    <main class="row">
+        <section class="col col-lg-8">
+            <div class="container">
+                <div class="jumbotron-fluid">
+                    <% if(locals.user) { %>
+						<h1><%= user.names %></div>
+                    <% } %>
+                    
+                    <h2>Welcome to your dashboard</h2>
+                    <p>View your personalized dashboard and manage business contacts</p>
+
+                    <br/>
+                    <a href="/contact-list" class="btn btn-primary" >
+                        Manage Contact List
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <aside class="col col-lg-4">
+            <div class="jumbotron-fluid">
+                Sidebar Area
+            </div>
+        </aside>
+    </main>
+
+
+<footer>
+    <%- include('partials/footer-admin'); %>
+</footer>
+
+<%- include('partials/scripts-admin'); %>
+
+</body>
+</html>
