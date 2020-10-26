@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Business Contact List Section</title>
+    <%- include('../partials/head-admin'); %>
+</head>
+<body>
+    <header>
+        <%- include('../partials/header-admin'); %>
+    </header>
+
+    <main class="container-fluid row mt-5">
+        <section class="col col-lg-8">
+            <div class="container">
+                <div class="py-5">
+                    <h3 class="display-5 text-center">Business Contact List</h3>
+                    <a href="/contact-list-create" class="btn btn-primary">Add New</a>
+
+                    <% if(locals.message) { %>
+                        <div class="alert alert-danger my-3" role="alert"><%= message %></div>
+                    <% } %>
+
+                    <table class="table mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Contact Name</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < list.length; i++) { %>
+                                <tr>
+                                    <th scope="row"><%= i+1 %></th>
+                                    <td><%= list[i].name %></td>
+                                    <td><%= list[i].number %></td>
+                                    <td><%= list[i].email %></td>
+                                    <td>
+                                        <a href="/contact-list-edit/<%= list[i].id %>" class="btn btn-info">Edit</a>
+                                        <a href="/contact-list-delete/<%= list[i].id %>" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </section>
+        
+        <aside class="col col-lg-4">
+            <%- include('../partials/sidebar'); %>
+        </aside>
+    </main>
+
+<footer>
+    <%- include('../partials/footer-admin'); %>
+</footer>
+
+<%- include('../partials/scripts-admin'); %>
+
+</body>
+</html>

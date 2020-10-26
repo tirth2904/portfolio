@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Business Contact List</title>
+    <%- include('../partials/head-admin'); %>
+</head>
+<body>
+    <header>
+        <%- include('../partials/header-admin'); %>
+    </header>
+
+    <main class="container-fluid row mt-5">
+        <section class="col col-lg-8">
+            <div class="container">
+                <div class="py-5">
+                    
+                    <% if(locals.message) { %>
+                        <div class="alert alert-<%= alert %>" role="alert"><%= message %></div>
+                    <% } %>
+
+                </div>
+            </div>
+        </section>
+        
+        <aside class="col col-lg-4">
+            <%- include('../partials/sidebar'); %>
+        </aside>
+    </main>
+
+<footer>
+    <%- include('../partials/footer-admin'); %>
+</footer>
+
+<%- include('../partials/scripts-admin'); %>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add a Business Contact List</title>
+    <%- include('../partials/head-admin'); %>
+</head>
+<body>
+    <header>
+        <%- include('../partials/header-admin'); %>
+    </header>
+
+    <main class="container-fluid row mt-5">
+        <section class="col col-lg-8">
+            <div class="container">
+                <div class="py-5">
+                    <h3 class="display-5 text-center">Add New Business Contact List</h3>
+                    <a href="/contact-list" class="btn btn-primary">View All</a>
+                    <br/>
+
+                    <form action="/contact-list" method="post" class="shadow p-5 my-5">
+                        <div class="form-group">
+                            <label for="contact_name">Contact Name</label>
+                            <input type="text" name="contact_name" class="form-control" id="contact_name" placeholder="Contact Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact_number">Contact Number</label>
+                            <input type="text" name="contact_number" class="form-control" id="contact_number" placeholder="Contact Number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact_email">Contact Email</label>
+                            <input type="email" name="contact_email" class="form-control" id="contact_email" placeholder="Contact Email" required>
+                        </div>
+
+                        <% if(locals.message) { %>
+                            <div class="alert alert-danger" role="alert"><%= message %></div>
+                        <% } %>
+    
+                        <br/>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            Add
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+        
+        <aside class="col col-lg-4">
+            <%- include('../partials/sidebar'); %>
+        </aside>
+    </main>
+
+<footer>
+    <%- include('../partials/footer-admin'); %>
+</footer>
+
+<%- include('../partials/scripts-admin'); %>
+
+</body>
+</html>

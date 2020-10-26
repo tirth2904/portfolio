@@ -10,5 +10,6 @@ db.mongoose = mongoose;
 db.url = dbConfig.url;
 
 db.users = require("./user.model")(mongoose);
+db.contacts = require("./contact.model")(mongoose);
 
 module.exports = db;

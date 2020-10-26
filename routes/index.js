@@ -3,6 +3,7 @@ var router = express.Router();
 const { checkAuth } = require('../middlewares');
 const db = require("../models");
 const User = db.users;
+const Contact = db.contacts;
 
 // function to check if a variable is empty or null
 // returns true if empty
@@ -55,9 +56,9 @@ router.get('/register', function(req, res){
 // POST register
 router.post('/register', function(req, res){
   // validate input
-  console.log('req.body', req.body);
   if(
       checkIfEmpty(req.body.username) || 
+      checkIfEmpty(req.body.email) || 
       checkIfEmpty(req.body.names) || 
       checkIfEmpty(req.body.password) || 
       checkIfEmpty(req.body.password_confirmation) || 
@@ -82,6 +83,7 @@ router.post('/register', function(req, res){
         // redirect to dashboard
         const newUser = new User({
           username: req.body.username,
+          email: req.body.email,
           names: req.body.names,
           password: req.body.password,
           phone: req.body.phone,
@@ -148,8 +150,127 @@ router.get('/dashboard', checkAuth, function(req, res){
 
 // GET contact-list
 router.get('/contact-list', checkAuth, function(req, res){
-  res.render('contact-list', {user: req.session.user})
+  Contact.find({}).sort({"name": 1})
+  .then(list => {
+    res.render('contact-list/index', {
+      user: req.session.user,
+      list: list,
+    })
+  })
 });
 
+// GET contact-list-create
+router.get('/contact-list-create', checkAuth, function(req, res){
+  res.render('contact-list/create', {user: req.session.user})
+});
+
+// GET contact-list-edit
+router.get('/contact-list-edit/:id', checkAuth, function(req, res){
+  Contact.findById(req.params.id).lean()
+  .exec((err, item) => {
+    if (err) {
+      res.render('contact-list/index', {message: err});
+    } else {
+      res.render('contact-list/edit', {
+        user: req.session.user,
+        item: item,
+      })
+    }
+  });
+
+});
+
+// POST contact-list
+router.post('/contact-list', function(req, res){
+  // validate input
+  if(
+    checkIfEmpty(req.body.contact_name) || 
+    checkIfEmpty(req.body.contact_email) || 
+    checkIfEmpty(req.body.contact_number)
+  )
+  {
+    res.render('contact-list/create', {message: "Please enter all fields"});
+  } else {
+    // add new record
+    const newContact = new Contact({
+      name: req.body.contact_name,
+      number: req.body.contact_number,
+      email: req.body.contact_email,
+    });
+  
+    newContact.save((err, newContact) => {
+      if (err) {
+        res.render('contact-list/create', {message: err});
+      } else {
+        res.redirect('contact-list');
+      }
+    });
+  }
+
+});
+
+// POST contact-list update
+router.post('/contact-list/:id', function(req, res){
+  // validate input
+  const id = req.params.id;
+  if(
+    checkIfEmpty(req.body.contact_name) || 
+    checkIfEmpty(req.body.contact_email) || 
+    checkIfEmpty(req.body.contact_number)
+  )
+  {
+    res.render('contact-list/response', {
+      message: `Please provide all fields`,
+      alert: 'danger'
+    });
+  } else {
+    const dt = {
+      name: req.body.contact_name,
+      number: req.body.contact_number,
+      email: req.body.contact_email,
+    };
+
+    Contact.findByIdAndUpdate(id, dt, { useFindAndModify: false, new: true })
+      .then(data => {
+        if (! data) {
+          res.render('contact-list/response', {
+            message: `Cannot update item with id=${id}. Maybe it was not found!`,
+            alert: 'danger'
+          });
+        } else {
+          res.redirect('/contact-list');
+        }
+      })
+      .catch(err => {
+        res.render('contact-list/response', {
+          message: `Error updating item with id=${id}`,
+          alert: 'danger'
+        });
+      });
+  }
+
+});
+
+// GET contact-list-delete
+router.get('/contact-list-delete/:id', checkAuth, function(req, res){
+  Contact.findByIdAndRemove(req.params.id)
+  .then(data => {
+    if (! data) {
+      res.render('contact-list/response', {
+        message: `Cannot delete item with id=${id}. Maybe it was not found!`,
+        alert: 'danger'
+      });
+    } else {
+      res.redirect('/contact-list');
+    }
+  })
+  .catch(err => {
+    res.render('contact-list/response', {
+      message: `Error deleting item with id=${id}`,
+      alert: 'danger'
+    });
+  });
+
+});
 
 module.exports = router;

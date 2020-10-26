@@ -1,11 +1,9 @@
 module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
-      username: {type: String, unique: true, required: true },
-      email: {type: String, unique: true, required: true },
-      password: {type: String, required: true },
-      names: String,
-      phone: String,
+      name: String,
+      number: String,
+      email: String,
     },
     { timestamps: true }
   );
@@ -20,6 +18,5 @@ module.exports = (mongoose) => {
   const findOrCreate = require('mongoose-findorcreate')
   schema.plugin(findOrCreate);
 
-  return mongoose.model("User", schema);
+  return mongoose.model("Contact", schema);
 }
-  
