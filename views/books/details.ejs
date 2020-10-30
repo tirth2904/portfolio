@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add a Book</title>
+    <title><%= title %></title>
     <%- include('../partials/head-admin'); %>
 </head>
 <body>
@@ -13,26 +13,31 @@
         <section class="col col-lg-8">
             <div class="container">
                 <div class="py-5">
-                    <h3 class="display-5 text-center">Add New Business Contact List</h3>
-                    <a href="/contact-list" class="btn btn-primary">View All</a>
+                    <h3 class="display-5 text-center">Add New Book</h3>
+                    <a href="/books" class="btn btn-primary">View All</a>
                     <br/>
 
-                    <form action="/contact-list" method="post" class="shadow p-5 my-5">
+                    <form action="/books/add" method="post" class="shadow p-5 my-5">
                         <div class="form-group">
-                            <label for="contact_name">Contact Name</label>
-                            <input type="text" name="contact_name" class="form-control" id="contact_name" placeholder="Contact Name" required>
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="contact_number">Contact Number</label>
-                            <input type="text" name="contact_number" class="form-control" id="contact_number" placeholder="Contact Number" required>
+                            <label for="author">Author</label>
+                            <input type="text" name="author" class="form-control" id="author" placeholder="Author Name" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="contact_email">Contact Email</label>
-                            <input type="email" name="contact_email" class="form-control" id="contact_email" placeholder="Contact Email" required>
+                            <label for="pages">Pages</label>
+                            <input type="number" name="pages" class="form-control" id="pages" placeholder="Number of Pages" required>
                         </div>
-
+                        
+                        <div class="form-group">
+                            <label for="isbn">ISBN</label>
+                            <input type="text" name="isbn" class="form-control" id="isbn" placeholder="ISBN" required>
+                        </div>
+                        
                         <% if(locals.message) { %>
                             <div class="alert alert-danger" role="alert"><%= message %></div>
                         <% } %>

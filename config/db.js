@@ -11,5 +11,6 @@ db.url = dbConfig.url;
 
 db.users = require("../models/user.model")(mongoose);
 db.contacts = require("../models/contact.model")(mongoose);
+db.books = require("../models/book.model")(mongoose);
 
 module.exports = db;

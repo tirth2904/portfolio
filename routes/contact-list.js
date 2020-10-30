@@ -17,13 +17,17 @@ router.get('/', checkAuth, function(req, res){
         res.render('contact-list/index', {
             user: req.session.user,
             list: list,
+            title: "Contact List",
         })
     })
 });
 
 // GET
 router.get('/create', checkAuth, function(req, res){
-    res.render('contact-list/create', {user: req.session.user})
+    res.render('contact-list/create', {
+        user: req.session.user,
+        title: "Add a New Contact List",
+    })
 });
 
 // GET
@@ -31,11 +35,15 @@ router.get('/:id', checkAuth, function(req, res){
     Contact.findById(req.params.id).lean()
     .exec((err, item) => {
         if (err) {
-            res.render('contact-list/index', {message: err});
+            res.render('contact-list/index', {
+                message: err,
+                title: "Contact List",
+            });
         } else {
             res.render('contact-list/edit', {
-            user: req.session.user,
-            item: item,
+                user: req.session.user,
+                item: item,
+                title: item.name,
             })
         }
     });
@@ -51,7 +59,10 @@ router.post('/', function(req, res){
         checkIfEmpty(req.body.contact_number)
     )
     {
-        res.render('contact-list/create', {message: "Please enter all fields"});
+        res.render('contact-list/create', {
+            message: "Please enter all fields",
+            title: "Add a New Contact List",
+        });
     } else {
         // add new record
         const newContact = new Contact({
@@ -62,9 +73,12 @@ router.post('/', function(req, res){
     
         newContact.save((err, newContact) => {
             if (err) {
-            res.render('contact-list/create', {message: err});
+                res.render('contact-list/create', {
+                    message: err,
+                    title: newContact.name
+                });
             } else {
-            res.redirect('contact-list');
+                res.redirect('contact-list');
             }
         });
     }
@@ -96,18 +110,18 @@ router.post('/:id', function(req, res) {
             .then(data => {
             if (! data) {
                 res.render('contact-list/response', {
-                message: `Cannot update item with id=${id}. Maybe it was not found!`,
-                alert: 'danger'
+                    message: `Cannot update item with id=${id}. Maybe it was not found!`,
+                    alert: 'danger'
                 });
             } else {
                 res.redirect('/contact-list');
             }
             })
             .catch(err => {
-            res.render('contact-list/response', {
-                message: `Error updating item with id=${id}`,
-                alert: 'danger'
-            });
+                res.render('contact-list/response', {
+                    message: `Error updating item with id=${id}`,
+                    alert: 'danger'
+                });
             });
         }
 
@@ -119,8 +133,8 @@ router.get('/delete/:id', checkAuth, function(req, res){
     .then(data => {
         if (! data) {
             res.render('contact-list/response', {
-            message: `Cannot delete item with id=${id}. Maybe it was not found!`,
-            alert: 'danger'
+                message: `Cannot delete item with id=${id}. Maybe it was not found!`,
+                alert: 'danger'
             });
         } else {
             res.redirect('/contact-list');
