@@ -4,14 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-
-// import routes for the app
-var indexRouter = require('./routes/index');
-
 var app = express();
 
 // setup the db
-const db = require("./models");
+const db = require("./config/db");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -41,8 +37,16 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// add the routes to our express app
-app.use('/', indexRouter);
+// import routes for the app
+var web = require("./routes/web");
+var auth = require("./routes/auth");
+var contactList = require("./routes/contact-list");
+var books = require("./routes/books");
+
+app.use('/', web);
+app.use('/', auth);
+app.use('/contact-list', contactList);
+app.use('/books', books);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

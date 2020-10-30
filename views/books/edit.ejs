@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit a Book</title>
+    <%- include('../partials/head-admin'); %>
+</head>
+<body>
+    <header>
+        <%- include('../partials/header-admin'); %>
+    </header>
+
+    <main class="container-fluid row mt-5">
+        <section class="col col-lg-8">
+            <div class="container">
+                <div class="py-5">
+                    <h3 class="display-5 text-center">Edit Business Contact List</h3>
+                    <a href="/contact-list" class="btn btn-primary">Back to All</a>
+                    <br/>
+
+                    <% if(locals.item) { %>
+
+                        <form action="/contact-list/<%= item._id %>" method="post" class="shadow p-5 my-5">
+                            <p class="text-muted">ID: <%= item._id %></p>
+                        
+                            <div class="form-group">
+                                <label for="contact_name">Contact Name</label>
+                                <input type="text" name="contact_name" class="form-control" id="contact_name" placeholder="Contact Name" value="<%= item.name %>" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact_number">Contact Number</label>
+                                <input type="text" name="contact_number" class="form-control" id="contact_number" placeholder="Contact Number" value="<%= item.number %>" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact_email">Contact Email</label>
+                                <input type="email" name="contact_email" class="form-control" id="contact_email" placeholder="Contact Email" value="<%= item.email %>" required>
+                            </div>
+
+                            <% if(locals.message) { %>
+                                <div class="alert alert-danger" role="alert"><%= message %></div>
+                            <% } %>
+        
+                            <br/>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                Update
+                            </button>
+                        </form>
+
+                    <% } %>
+
+                </div>
+            </div>
+        </section>
+        
+        <aside class="col col-lg-4">
+            <%- include('../partials/sidebar'); %>
+        </aside>
+    </main>
+
+<footer>
+    <%- include('../partials/footer-admin'); %>
+</footer>
+
+<%- include('../partials/scripts-admin'); %>
+
+</body>
+</html>

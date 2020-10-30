@@ -9,7 +9,7 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 
-db.users = require("./user.model")(mongoose);
-db.contacts = require("./contact.model")(mongoose);
+db.users = require("../models/user.model")(mongoose);
+db.contacts = require("../models/contact.model")(mongoose);
 
 module.exports = db;
